@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer Price Mechanism in Banking — A Strategic Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1C2E;
+    --navy-mid: #132840;
+    --navy-light: #1E3A55;
+    --gold: #C8973A;
+    --gold-light: #E4B86A;
+    --cream: #F6F1E8;
+    --cream-dark: #EDE5D4;
+    --text: #1A1A2E;
+    --text-light: #4A5568;
+    --white: #FFFFFF;
+    --accent-teal: #2D8C7E;
+    --accent-red: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px 60px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,151,58,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(45,140,126,0.06) 0%, transparent 60%);
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,151,58,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,151,58,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.12;
+    margin-bottom: 28px;
+    max-width: 780px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    max-width: 580px;
+    line-height: 1.75;
+    margin-bottom: 56px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+  }
+
+  /* Animated flow diagram in hero */
+  .hero-diagram {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+  }
+
+  /* ——— ARTICLE LAYOUT ——— */
+  .article-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* ——— DROP CAP INTRO ——— */
+  .intro-block {
+    border-left: 3px solid var(--gold);
+    padding-left: 32px;
+    margin-bottom: 64px;
+  }
+
+  .intro-block p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: var(--navy);
+    float: left;
+    line-height: 0.8;
+    margin-right: 12px;
+    margin-top: 8px;
+  }
+
+  .intro-block p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  /* ——— SECTION HEADINGS ——— */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 28px;
+  }
+
+  h3.sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    margin-top: 32px;
+  }
+
+  p.body-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #2C3E50;
+    margin-bottom: 22px;
+  }
+
+  /* ——— DIVIDER ——— */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 64px 0 56px;
+  }
+
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(11,28,46,0.15), transparent);
+  }
+
+  .section-divider span {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    color: var(--gold);
+  }
+
+  /* ——— PULL QUOTE ——— */
+  .pull-quote {
+    background: var(--navy);
+    color: var(--white);
+    padding: 40px 48px;
+    margin: 48px -20px;
+    position: relative;
+    border-left: 4px solid var(--gold);
+  }
+
+  .pull-quote::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: rgba(200,151,58,0.2);
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    line-height: 1;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ——— INTERACTIVE: MTPM FLOW DIAGRAM ——— */
+  .diagram-section {
+    background: var(--navy);
+    padding: 56px 48px;
+    margin: 56px -20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diagram-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,151,58,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,151,58,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .diagram-section h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .diagram-section .diagram-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    row-gap: 24px;
+  }
+
+  .flow-node {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,151,58,0.3);
+    padding: 22px 20px;
+    text-align: center;
+    min-width: 140px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .flow-node:hover {
+    background: rgba(200,151,58,0.1);
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .flow-node.active {
+    background: rgba(200,151,58,0.15);
+    border-color: var(--gold);
+  }
+
+  .flow-node .node-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .flow-node .node-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .flow-node .node-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .flow-node .node-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 8px;
+    line-height: 1.5;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+  }
+
+  .flow-arrow-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,151,58,0.4), var(--gold), rgba(200,151,58,0.4));
+    position: relative;
+  }
+
+  .flow-arrow-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .flow-arrow-head {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid var(--gold);
+    margin-left: -2px;
+    align-self: flex-start;
+    margin-top: -3px;
+    display: none;
+  }
+
+  .node-detail-panel {
+    margin-top: 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,151,58,0.2);
+    padding: 24px 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    min-height: 100px;
+  }
+
+  .node-detail-panel h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .node-detail-panel p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  /* ——— INTERACTIVE TP CURVE BUILDER ——— */
+  .curve-builder {
+    background: var(--cream-dark);
+    border: 1px solid rgba(11,28,46,0.12);
+    padding: 48px;
+    margin: 56px -20px;
+  }
+
+  .curve-builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .curve-builder-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+  }
+
+  .curve-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    max-width: 340px;
+  }
+
+  .curve-control-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .curve-control-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .curve-control-label span {
+    font-weight: 500;
+    color: var(--navy);
+    font-size: 11px;
+  }
+
+  .curve-control-item input[type="range"] {
+    width: 100%;
+    height: 3px;
+    -webkit-appearance: none;
+    background: rgba(11,28,46,0.15);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .curve-control-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(200,151,58,0.4);
+  }
+
+  .range-base input[type="range"]::-webkit-slider-thumb { background: var(--navy); }
+  .range-credit input[type="range"]::-webkit-slider-thumb { background: #E74C3C; }
+  .range-liquidity input[type="range"]::-webkit-slider-thumb { background: #27AE60; }
+  .range-regulatory input[type="range"]::-webkit-slider-thumb { background: #8E44AD; }
+
+  .curve-chart-area {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .curve-canvas-wrap {
+    position: relative;
+    width: 100%;
+    height: 260px;
+  }
+
+  #curveCanvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .curve-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .total-rate-display {
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .total-rate-display .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .total-rate-display .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .total-rate-display .value span {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.4);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ——— FORMULA CARDS ——— */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .formula-card {
+    border: 1px solid rgba(11,28,46,0.1);
+    padding: 28px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .formula-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--navy);
+  }
+
+  .formula-card.offer::before { background: var(--accent-teal); }
+
+  .formula-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(11,28,46,0.1);
+  }
+
+  .formula-card .card-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .formula-card .card-formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--navy);
+    line-height: 1.8;
+  }
+
+  .formula-card .card-formula .op {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .formula-card .applies-to {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(11,28,46,0.08);
+    font-size: 0.8rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  /* ——— REFRESH FREQUENCY TABLE ——— */
+  .frequency-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .freq-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 80px;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .freq-name {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .freq-bar-track {
+    height: 8px;
+    background: rgba(11,28,46,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .freq-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .freq-bar-fill.animated { transform: scaleX(1); }
+
+  .freq-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  /* ——— OBJECTIVE CARDS ——— */
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid rgba(11,28,46,0.1);
+  }
+
+  .obj-card {
+    padding: 32px 28px;
+    border-right: 1px solid rgba(11,28,46,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .obj-card:last-child { border-right: none; }
+
+  .obj-card:hover { background: var(--navy); }
+  .obj-card:hover .obj-number { color: var(--gold); }
+  .obj-card:hover .obj-title { color: var(--white); }
+  .obj-card:hover .obj-text { color: rgba(255,255,255,0.6); }
+
+  .obj-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(11,28,46,0.08);
+    line-height: 1;
+    margin-bottom: 16px;
+    transition: color 0.3s ease;
+  }
+
+  .obj-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+    line-height: 1.35;
+  }
+
+  .obj-text {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    transition: color 0.3s ease;
+  }
+
+  /* ——— PRODUCT COVERAGE ——— */
+  .product-tabs {
+    margin: 40px 0;
+  }
+
+  .tab-buttons {
+    display: flex;
+    border-bottom: 2px solid rgba(11,28,46,0.1);
+    margin-bottom: 0;
+  }
+
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-light);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--navy);
+  }
+
+  .tab-panel {
+    display: none;
+    padding: 28px 0;
+  }
+
+  .tab-panel.active { display: block; }
+
+  .product-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .product-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--white);
+    border: 1px solid rgba(11,28,46,0.07);
+    transition: all 0.25s ease;
+  }
+
+  .product-item:hover {
+    border-color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .product-item .p-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    min-width: 20px;
+    padding-top: 3px;
+  }
+
+  .product-item .p-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+
+  .product-item .p-rate {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ——— CLOSING SECTION ——— */
+  .closing-section {
+    background: var(--navy);
+    padding: 72px 80px;
+    margin: 80px -20px -120px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(200,151,58,0.1) 0%, transparent 70%);
+  }
+
+  .closing-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--white);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .closing-section p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hashtag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hashtag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    padding: 6px 14px;
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 2px;
+  }
+
+  /* ——— SCROLL REVEAL ——— */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ——— PULSE ANIMATION ——— */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.15); }
+  }
+
+  @keyframes flow-pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+
+  .animated-line {
+    stroke-dasharray: 6 4;
+    animation: dash-move 2s linear infinite;
+  }
+
+  @keyframes dash-move {
+    to { stroke-dashoffset: -20; }
+  }
+
+  /* ——— RESPONSIVE ——— */
+  @media (max-width: 720px) {
+    .formula-grid { grid-template-columns: 1fr; }
+    .objectives-grid { grid-template-columns: 1fr; }
+    .obj-card { border-right: none; border-bottom: 1px solid rgba(11,28,46,0.1); }
+    .freq-row { grid-template-columns: 120px 1fr 60px; }
+    .curve-builder { padding: 28px; }
+    .diagram-section { padding: 32px 24px; }
+    .hero-diagram { display: none; }
+    .pull-quote { margin: 40px 0; padding: 30px 28px; }
+    .closing-section { padding: 56px 32px; }
+    .article-body { padding: 56px 24px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ——— HERO ——— -->
+<header class="hero">
+  <div class="grid-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Strategic Banking | Asset-Liability Management</div>
+    <h1>Transfer Price Mechanism:<br>The <em>Hidden Architecture</em><br>of Bank Profitability</h1>
+    <p class="hero-sub">How matched-maturity transfer pricing transforms internal fund flows into a precision instrument for performance, risk, and strategy.</p>
+    <div class="hero-meta">
+      <span class="meta-pill" style="border-color:rgba(200,151,58,0.5);color:rgba(200,151,58,0.9);font-size:11px;letter-spacing:2px;">Prabhat Ojha &nbsp;·&nbsp; Economist</span>
+      <span class="meta-pill">Deep Dive</span>
+      <span class="meta-pill">ALM Framework</span>
+      <span class="meta-pill">14 min read</span>
+    </div>
+  </div>
+
+  <!-- SVG Hero Diagram -->
+  <div class="hero-diagram">
+    <svg width="340" height="400" viewBox="0 0 340 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background nodes -->
+      <rect x="20" y="40" width="110" height="56" rx="2" fill="rgba(255,255,255,0.04)" stroke="rgba(200,151,58,0.3)" stroke-width="1"/>
+      <text x="75" y="63" text-anchor="middle" fill="rgba(200,151,58,0.7)" font-family="monospace" font-size="8" letter-spacing="1">BRANCH A</text>
+      <text x="75" y="83" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Georgia" font-size="11" font-weight="bold">Deposits</text>
+
+      <rect x="20" y="120" width="110" height="56" rx="2" fill="rgba(255,255,255,0.04)" stroke="rgba(200,151,58,0.3)" stroke-width="1"/>
+      <text x="75" y="143" text-anchor="middle" fill="rgba(200,151,58,0.7)" font-family="monospace" font-size="8" letter-spacing="1">BRANCH B</text>
+      <text x="75" y="163" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Georgia" font-size="11" font-weight="bold">Advances</text>
+
+      <rect x="20" y="200" width="110" height="56" rx="2" fill="rgba(255,255,255,0.04)" stroke="rgba(200,151,58,0.3)" stroke-width="1"/>
+      <text x="75" y="223" text-anchor="middle" fill="rgba(200,151,58,0.7)" font-family="monospace" font-size="8" letter-spacing="1">BRANCH C</text>
+      <text x="75" y="243" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Georgia" font-size="11" font-weight="bold">Mixed Book</text>
+
+      <!-- CFU Center -->
+      <rect x="115" y="100" width="110" height="140" rx="2" fill="rgba(200,151,58,0.12)" stroke="rgba(200,151,58,0.6)" stroke-width="1.5"/>
+      <text x="170" y="155" text-anchor="middle" fill="rgba(200,151,58,0.5)" font-family="monospace" font-size="7" letter-spacing="2">CENTRAL</text>
+      <text x="170" y="170" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Georgia" font-size="13" font-weight="bold">CFU</text>
+      <text x="170" y="188" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="7" letter-spacing="1">FUNDING UNIT</text>
+
+      <!-- Treasury -->
+      <rect x="210" y="150" width="110" height="60" rx="2" fill="rgba(45,140,126,0.1)" stroke="rgba(45,140,126,0.4)" stroke-width="1"/>
+      <text x="265" y="175" text-anchor="middle" fill="rgba(45,140,126,0.8)" font-family="monospace" font-size="8" letter-spacing="1">TREASURY</text>
+      <text x="265" y="196" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Georgia" font-size="10">Market Access</text>
+
+      <!-- Animated flow lines -->
+      <line x1="130" y1="68" x2="130" y2="148" stroke="rgba(200,151,58,0.3)" stroke-width="1" stroke-dasharray="3 3" class="animated-line"/>
+      <line x1="130" y1="148" x2="130" y2="228" stroke="rgba(200,151,58,0.3)" stroke-width="1" stroke-dasharray="3 3" class="animated-line"/>
+
+      <!-- Connecting arrows -->
+      <path d="M130 68 L115 128" stroke="rgba(200,151,58,0.5)" stroke-width="1.5" marker-end="url(#arrow-gold)"/>
+      <path d="M130 148 L115 168" stroke="rgba(200,151,58,0.5)" stroke-width="1.5"/>
+      <path d="M130 228 L115 200" stroke="rgba(200,151,58,0.5)" stroke-width="1.5" marker-end="url(#arrow-gold)"/>
+
+      <path d="M225 168 L225 178" stroke="rgba(45,140,126,0.7)" stroke-width="1.5" marker-end="url(#arrow-teal)"/>
+
+      <!-- Interest Rate Risk label -->
+      <rect x="50" y="300" width="240" height="40" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <text x="170" y="317" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="7" letter-spacing="1.5">INTEREST RATE RISK</text>
+      <text x="170" y="333" text-anchor="middle" fill="rgba(200,151,58,0.6)" font-family="monospace" font-size="7" letter-spacing="1">CENTRALIZED AT CFU</text>
+
+      <defs>
+        <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(200,151,58,0.7)"/>
+        </marker>
+        <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(45,140,126,0.7)"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+</header>
+
+<!-- ——— ARTICLE BODY ——— -->
+<main class="article-body">
+
+  <!-- Intro -->
+  <div class="intro-block reveal">
+    <p>In any bank, funds flow in all directions simultaneously — mobilized as deposits by one branch, deployed as loans by another, traded as securities by the Treasury. Yet there is rarely a one-to-one match between what comes in and what goes out. Without a mechanism to attribute costs and credits to each of these flows, performance measurement becomes a game of educated guessing.</p>
+    <p>Transfer Price Mechanism (TPM) changes that. It assigns a precise internal interest rate to every source and use of funds, making the contribution of every branch, product, and transaction measurable, comparable, and actionable. Done well, it is one of the most powerful levers a bank's leadership can pull.</p>
+  </div>
+
+  <!-- Objectives -->
+  <div class="reveal">
+    <span class="section-label">Why It Matters</span>
+    <h2 class="section-title">Three Strategic Objectives</h2>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <div class="obj-number">01</div>
+        <div class="obj-title">Multi-Dimensional Profitability</div>
+        <div class="obj-text">Measure true contribution across verticals, zones, products, customers — and down to the individual account level.</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-number">02</div>
+        <div class="obj-title">Centralized Risk Management</div>
+        <div class="obj-text">Transfer interest rate risk and liquidity risk from branches to a Central Funding Unit, leaving business units to focus on credit risk alone.</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-number">03</div>
+        <div class="obj-title">Profit-Driven Growth</div>
+        <div class="obj-text">Incentivize business units to pursue profitable pricing decisions rather than chasing volume targets that may erode margins.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- MTPM Section -->
+  <div class="reveal">
+    <span class="section-label">The Core Framework</span>
+    <h2 class="section-title">Matched-Maturity Transfer Pricing</h2>
+    <p class="body-text">The gold standard in modern bank treasury is the <strong>Matched-Maturity Transfer Pricing Mechanism (MTPM)</strong>. Unlike simpler pool-rate approaches, MTPM assigns a unique transfer rate to every individual transaction based on its maturity, repricing frequency, and cash flow characteristics. This granularity is what makes it both powerful and technically demanding.</p>
+    <p class="body-text">The spread for every account is locked in at origination and held constant until maturity or the next repricing date. This eliminates the rate uncertainty that plagues simpler systems and gives business units clarity on their contribution from day one.</p>
+  </div>
+
+  <!-- Interactive MTPM Flow -->
+  <div class="diagram-section reveal">
+    <div class="diagram-sub">Interactive — Click any node to explore</div>
+    <h3>How MTPM Works: The Internal Fund Flow</h3>
+    <div class="flow-diagram" id="flowDiagram">
+
+      <div class="flow-node" data-id="branches" onclick="selectNode(this, 'branches')">
+        <div class="node-icon">🏦</div>
+        <div class="node-label">Business Units</div>
+        <div class="node-title">Branches &amp; Treasury</div>
+        <div class="node-desc">Mobilize deposits, extend loans, manage investments</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-label">Deposits →</div>
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-label">← Funds</div>
+      </div>
+
+      <div class="flow-node active" data-id="cfu" onclick="selectNode(this, 'cfu')">
+        <div class="node-icon">⚙️</div>
+        <div class="node-label">Clearinghouse</div>
+        <div class="node-title">Central Funding Unit (CFU)</div>
+        <div class="node-desc">Assigns transfer rates, absorbs IR risk, manages mismatches</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-label">Surplus/Deficit</div>
+        <div class="flow-arrow-line"></div>
+      </div>
+
+      <div class="flow-node" data-id="treasury" onclick="selectNode(this, 'treasury')">
+        <div class="node-icon">📈</div>
+        <div class="node-label">Market Access</div>
+        <div class="node-title">Treasury</div>
+        <div class="node-desc">Manages excess/deficit with wholesale market; only unit with market access</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-label">Policy</div>
+        <div class="flow-arrow-line"></div>
+      </div>
+
+      <div class="flow-node" data-id="alco" onclick="selectNode(this, 'alco')">
+        <div class="node-icon">🎯</div>
+        <div class="node-label">Governance</div>
+        <div class="node-title">ALCO</div>
+        <div class="node-desc">Sets transfer rates, approves methodology, manages macro interest rate strategy</div>
+      </div>
+
+    </div>
+
+    <div class="node-detail-panel" id="nodeDetail">
+      <h4>Central Funding Unit — The Heart of MTPM</h4>
+      <p>The CFU acts as the internal clearinghouse. Every branch notionally "parks" its deposits here and "borrows" funds for its advances from here. Asset-liability mismatches accumulate at the CFU, where the Treasury manages them — shielding business units from interest rate risk entirely.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- TP Curve Builder -->
+  <div class="reveal">
+    <span class="section-label">The Rate Architecture</span>
+    <h2 class="section-title">Building the TP Curve</h2>
+    <p class="body-text">The transfer price is not a single rate — it is the sum of four distinct, purposeful components. Each compensates for a specific economic reality facing the bank. Adjust the sliders below to see how each component shapes the final curve.</p>
+  </div>
+
+  <div class="curve-builder reveal">
+    <div class="curve-builder-header">
+      <div>
+        <h3>Interactive TP Curve Builder</h3>
+        <p style="font-size:0.82rem;color:var(--text-light);margin-top:6px;font-family:'DM Mono',monospace;letter-spacing:1px;">Drag sliders to adjust each component</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+      <div class="curve-controls">
+
+        <div class="curve-control-item range-base">
+          <div class="curve-control-label">
+            TP Base Rate (G-Sec / MIBOR) <span id="baseVal">5.50%</span>
+          </div>
+          <input type="range" id="baseSlider" min="400" max="800" value="550" step="5" oninput="updateCurve()">
+          <div style="font-size:0.75rem;color:var(--text-light);margin-top:3px;">Refreshed: <strong>Daily</strong> · Source: FBIL</div>
+        </div>
+
+        <div class="curve-control-item range-credit">
+          <div class="curve-control-label">
+            Credit Risk Premium (FIMMDA) <span id="creditVal">0.60%</span>
+          </div>
+          <input type="range" id="creditSlider" min="20" max="200" value="60" step="5" oninput="updateCurve()">
+          <div style="font-size:0.75rem;color:var(--text-light);margin-top:3px;">Refreshed: <strong>Fortnightly</strong> · Based on credit rating</div>
+        </div>
+
+        <div class="curve-control-item range-liquidity">
+          <div class="curve-control-label">
+            Liquidity Premium <span id="liqVal">0.30%</span>
+          </div>
+          <input type="range" id="liqSlider" min="5" max="120" value="30" step="5" oninput="updateCurve()">
+          <div style="font-size:0.75rem;color:var(--text-light);margin-top:3px;">Refreshed: <strong>Monthly</strong> · Opportunity cost of buffer</div>
+        </div>
+
+        <div class="curve-control-item range-regulatory">
+          <div class="curve-control-label">
+            Regulatory Reserve Adj. (CRR/SLR) <span id="regVal">0.40%</span>
+          </div>
+          <input type="range" id="regSlider" min="10" max="150" value="40" step="5" oninput="updateCurve()">
+          <div style="font-size:0.75rem;color:var(--text-light);margin-top:3px;">Refreshed: <strong>Monthly</strong> · Net cost of CRR + SLR carry</div>
+        </div>
+      </div>
+
+      <div class="curve-chart-area">
+        <div class="curve-canvas-wrap">
+          <canvas id="curveCanvas"></canvas>
+        </div>
+        <div class="curve-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>Base Rate</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#E74C3C"></div>Credit Risk</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#27AE60"></div>Liquidity</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#8E44AD"></div>Regulatory</div>
+        </div>
+        <div class="total-rate-display">
+          <span class="label">Total Offer Rate</span>
+          <span class="value" id="totalRate">6.80% <span>p.a.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- Bid / Offer Formulas -->
+  <div class="reveal">
+    <span class="section-label">Rate Construction</span>
+    <h2 class="section-title">Bid &amp; Offer Rate Mechanics</h2>
+    <p class="body-text">All transfer prices flow from two foundational formulas — one for liabilities (what branches receive for deposits mobilized) and one for assets (what branches pay for funds deployed).</p>
+
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="card-type">Liability Products · Transfer Credit</div>
+        <div class="card-formula">
+          Bid Rate =<br>
+          Interbank Rate<br>
+          <span class="op">+</span> Credit Spread<br>
+          <span class="op">−</span> Deposit Insurance Cost
+        </div>
+        <div class="applies-to">Applied to: All deposit products — current, savings, term, recurring. The branch receives this rate as Transfer Credit for funds parked with CFU.</div>
+      </div>
+
+      <div class="formula-card offer">
+        <div class="card-type">Asset Products · Transfer Charge</div>
+        <div class="card-formula">
+          Offer Rate =<br>
+          Bid Rate<br>
+          <span class="op">+</span> Liquidity Premium<br>
+          <span class="op">+</span> Opportunity Cost of CRR &amp; SLR
+        </div>
+        <div class="applies-to">Applied to: Advances, non-SLR investments. The branch pays this rate as Transfer Charge for funds borrowed from CFU.</div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <p>The spread between bid and offer is not a profit margin — it is a precise compensation for liquidity management and regulatory compliance costs borne by the bank as a whole, centralized where they can be controlled.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- Refresh Frequency -->
+  <div class="reveal">
+    <span class="section-label">Operational Cadence</span>
+    <h2 class="section-title">Curve Refresh Frequencies</h2>
+    <p class="body-text">Each component of the TP curve is refreshed at a different frequency, calibrated to how quickly the underlying market reality changes.</p>
+
+    <div class="frequency-bars" id="freqBars">
+      <div class="freq-row">
+        <span class="freq-name">TP Base Rate</span>
+        <div class="freq-bar-track"><div class="freq-bar-fill" style="width:100%;background:var(--navy);"></div></div>
+        <span class="freq-badge" style="background:rgba(11,28,46,0.08);color:var(--navy)">Daily</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-name">Credit Risk Premium</span>
+        <div class="freq-bar-track"><div class="freq-bar-fill" style="width:75%;background:#E74C3C;"></div></div>
+        <span class="freq-badge" style="background:rgba(231,76,60,0.08);color:#C0392B">Fortnightly</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-name">Liquidity Premium</span>
+        <div class="freq-bar-track"><div class="freq-bar-fill" style="width:50%;background:#27AE60;"></div></div>
+        <span class="freq-badge" style="background:rgba(39,174,96,0.08);color:#1E8449">Monthly</span>
+      </div>
+      <div class="freq-row">
+        <span class="freq-name">Regulatory Reserve Adj.</span>
+        <div class="freq-bar-track"><div class="freq-bar-fill" style="width:50%;background:#8E44AD;"></div></div>
+        <span class="freq-badge" style="background:rgba(142,68,173,0.08);color:#6C3483">Monthly</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- Product Coverage Tabs -->
+  <div class="reveal">
+    <span class="section-label">Product Scope</span>
+    <h2 class="section-title">What Gets Transfer Priced?</h2>
+    <p class="body-text">TPM applies to all financial assets and liabilities on the balance sheet. The determination of the appropriate tenor — and hence the rate — varies by product type.</p>
+
+    <div class="product-tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab(event, 'liabilities')">Liabilities</button>
+        <button class="tab-btn" onclick="switchTab(event, 'assets')">Assets</button>
+        <button class="tab-btn" onclick="switchTab(event, 'special')">Special Cases</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-liabilities">
+        <ul class="product-list">
+          <li class="product-item">
+            <span class="p-num">01</span>
+            <div><div class="p-name">All Deposit Products (Savings, Current, Term, Recurring)</div><div class="p-rate">Bid Rate = TP Base Rate + Credit Spread − Deposit Insurance Cost · Non-maturity products use behavioural maturity</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">02</span>
+            <div><div class="p-name">Certificate of Deposit (CD) issued by the Bank</div><div class="p-rate">Bid Rate = CD YTM (matched maturity, FBIL) + 25 bps</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">03</span>
+            <div><div class="p-name">Refinance / LTRO / TLTRO</div><div class="p-rate">Bid Rate = MIBOR/Term MIBOR (matched maturity, FBIL) + 25 bps</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">04</span>
+            <div><div class="p-name">Money Market Borrowings</div><div class="p-rate">Bid Rate = MIBOR/Term MIBOR (matched maturity, FBIL) + 25 bps</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">—</span>
+            <div><div class="p-name">Tier 1 &amp; Tier 2 Bonds issued by the Bank</div><div class="p-rate">Exempt from TPM</div></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="tab-assets">
+        <ul class="product-list">
+          <li class="product-item">
+            <span class="p-num">01</span>
+            <div><div class="p-name">Advances &amp; Non-SLR Investments</div><div class="p-rate">Offer Rate = TP Base Rate + Credit Spread − Insurance Cost + LP + CRR/SLR Opportunity Cost</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">02</span>
+            <div><div class="p-name">SLR Investments (T-Bills, G-Sec, SDL)</div><div class="p-rate">Offer Rate = T-Bill/G-Sec Par YTM (matched maturity, FBIL) − 25 bps</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">03</span>
+            <div><div class="p-name">Money Market Lending</div><div class="p-rate">Offer Rate = MIBOR/Term MIBOR (matched maturity, FBIL)</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">04</span>
+            <div><div class="p-name">CRR</div><div class="p-rate">Offer Rate = Zero (regulatory asset, no return)</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">—</span>
+            <div><div class="p-name">RIDF Contributions</div><div class="p-rate">Exempt from TPM</div></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="tab-special">
+        <ul class="product-list">
+          <li class="product-item">
+            <span class="p-num">✦</span>
+            <div><div class="p-name">Staff Loans</div><div class="p-rate">TP Rate = Standard Rate − 200 bps · Recognizes concessional nature of staff benefits</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">✦</span>
+            <div><div class="p-name">Agriculture (Fixed Rate)</div><div class="p-rate">TP Rate = Standard Rate − 100 bps · Incentive to promote priority sector lending</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">✦</span>
+            <div><div class="p-name">New Branches (up to 3 years)</div><div class="p-rate">Bid/Offer Rates adjusted by ±50 bps to support establishment phase</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">✦</span>
+            <div><div class="p-name">NPA / NPI Accounts</div><div class="p-rate">TP rate frozen at pre-NPA level — branches not penalized twice for credit loss</div></div>
+          </li>
+          <li class="product-item">
+            <span class="p-num">✦</span>
+            <div><div class="p-name">Overseas Branches</div><div class="p-rate">Capital funds: 6-month SOFR + 50 bps · Market borrowings at prevailing interbank rates</div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- Closing -->
+  <div class="reveal">
+    <span class="section-label">The Bottom Line</span>
+    <h2 class="section-title">TPM Is Not Accounting — It's Strategy</h2>
+    <p class="body-text">When implemented rigorously, Transfer Price Mechanism does something no P&L statement alone can do: it reveals the true economics of every decision made across the bank. It answers, precisely, whether a deposit mobilized at a particular rate and tenor actually creates value. It tells the branch manager whether a loan priced at EBLR + 150 bps actually covers the bank's full cost of funds. It shows the ALCO, in real time, where mismatches are building and where margin is being created or destroyed.</p>
+    <p class="body-text">The transition from simplistic pool-rate pricing to matched-maturity transfer pricing is not trivial. It requires investment in technology, governance, and analytical capability. But the payoff — in clarity, fairness of performance measurement, risk discipline, and profit optimization — makes it one of the highest-return initiatives available to bank leadership.</p>
+    <p class="body-text">The banks that will lead the next decade of Indian banking are those that have already moved beyond volume targets and into the realm of risk-adjusted, transfer-priced profitability. MTPM is not a future aspiration. It is a present necessity.</p>
+  </div>
+
+  <!-- Closing CTA -->
+  <div class="closing-section">
+    <h2>What's your bank's approach to Transfer Pricing?</h2>
+    <p>I'd love to hear from treasury professionals, ALM practitioners, and bank strategists — whether your institution is at the pooling stage or has fully implemented MTPM. Drop your thoughts below.</p>
+    <div style="margin-top:24px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(200,151,58,0.6);text-transform:uppercase;">— Prabhat Ojha, Economist</div>
+  </div>
+
+</main>
+
+<script>
+// ——— SCROLL REVEAL ———
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 0);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ——— FREQUENCY BARS ANIMATION ———
+const freqObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fills = entry.target.querySelectorAll('.freq-bar-fill');
+      fills.forEach((fill, i) => {
+        setTimeout(() => fill.classList.add('animated'), i * 200);
+      });
+      freqObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+const freqBars = document.getElementById('freqBars');
+if (freqBars) freqObserver.observe(freqBars);
+
+// ——— FLOW DIAGRAM NODE DETAILS ———
+const nodeDetails = {
+  branches: {
+    title: 'Branches & Treasury — Business Units',
+    text: 'All customer-facing branches and the market-facing Treasury are business units under MTPM. Each deposit is notionally "lent" to the CFU at the Bid Rate; each advance "borrows" from CFU at the Offer Rate. This design isolates their P&L from interest rate movements entirely.'
+  },
+  cfu: {
+    title: 'Central Funding Unit — The Internal Clearinghouse',
+    text: 'The CFU sits at the center of the MTPM architecture. Managed by the Strategic Planning Department, it administers all transfer rates, absorbs every asset-liability mismatch across the bank, and works with Treasury to manage the resulting interest rate exposure centrally.'
+  },
+  treasury: {
+    title: 'Treasury — The Only Market-Facing Unit',
+    text: 'Treasury is unique: it is the only business unit authorized to access external wholesale markets — call money, CBLO, repo/reverse repo, LAF, CD issuance, and bond markets. It manages the bank-wide funding surplus or deficit on behalf of CFU, and is itself a profit centre under TPM.'
+  },
+  alco: {
+    title: 'ALCO — The Policy Authority',
+    text: 'The Asset-Liability Committee is the ultimate decision-maker on transfer pricing rates. It is supported by the Executive Level Committee for TPM (ELC-TPM), a cross-functional body of all vertical heads and the CFO/CRO, which meets quarterly to review methodology and make recommendations.'
+  }
+};
+
+function selectNode(el, id) {
+  document.querySelectorAll('.flow-node').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  const detail = document.getElementById('nodeDetail');
+  const data = nodeDetails[id];
+  detail.innerHTML = `<h4>${data.title}</h4><p>${data.text}</p>`;
+}
+
+// ——— TP CURVE CANVAS ———
+function updateCurve() {
+  const base = parseInt(document.getElementById('baseSlider').value);
+  const credit = parseInt(document.getElementById('creditSlider').value);
+  const liq = parseInt(document.getElementById('liqSlider').value);
+  const reg = parseInt(document.getElementById('regSlider').value);
+
+  document.getElementById('baseVal').textContent = (base/100).toFixed(2) + '%';
+  document.getElementById('creditVal').textContent = (credit/100).toFixed(2) + '%';
+  document.getElementById('liqVal').textContent = (liq/100).toFixed(2) + '%';
+  document.getElementById('regVal').textContent = (reg/100).toFixed(2) + '%';
+
+  const total = (base + credit + liq + reg) / 100;
+  document.getElementById('totalRate').innerHTML = total.toFixed(2) + '% <span>p.a.</span>';
+
+  drawCurve(base, credit, liq, reg);
+}
+
+function drawCurve(base, credit, liq, reg) {
+  const canvas = document.getElementById('curveCanvas');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  const W = rect.width;
+  const H = rect.height;
+  const pad = { top: 20, bottom: 36, left: 40, right: 16 };
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Tenors
+  const tenors = ['O/N', '7D', '1M', '3M', '6M', '1Y', '2Y', '3Y', '5Y', '7Y', '10Y', '15Y'];
+  const n = tenors.length;
+
+  // Generate curves (slight upward slope)
+  const baseRates = tenors.map((_, i) => base + i * 8);
+  const creditPremiums = tenors.map((_, i) => credit + Math.max(0, i - 4) * 3);
+  const liqPremiums = tenors.map(() => liq);
+  const regPremiums = tenors.map(() => reg);
+
+  const totalRates = baseRates.map((b, i) => b + creditPremiums[i] + liqPremiums[i] + regPremiums[i]);
+
+  const maxRate = Math.max(...totalRates) * 1.1;
+  const minRate = 0;
+
+  function toX(i) { return pad.left + (i / (n - 1)) * chartW; }
+  function toY(val) { return pad.top + chartH - (val / maxRate) * chartH; }
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(11,28,46,0.06)';
+  ctx.lineWidth = 1;
+  for (let j = 0; j <= 4; j++) {
+    const y = pad.top + (j / 4) * chartH;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+  }
+
+  // Stacked fills
+  const layers = [
+    { data: baseRates, color: 'rgba(11,28,46,0.25)', bottom: Array(n).fill(0) },
+    { data: creditPremiums, color: 'rgba(231,76,60,0.2)', bottom: baseRates },
+    { data: liqPremiums, color: 'rgba(39,174,96,0.2)', bottom: baseRates.map((b, i) => b + creditPremiums[i]) },
+    { data: regPremiums, color: 'rgba(142,68,173,0.2)', bottom: baseRates.map((b, i) => b + creditPremiums[i] + liqPremiums[i]) },
+  ];
+
+  layers.forEach(layer => {
+    ctx.beginPath();
+    ctx.moveTo(toX(0), toY(layer.bottom[0]));
+    for (let i = 0; i < n; i++) {
+      const x = toX(i);
+      const y = toY(layer.bottom[i] + layer.data[i]);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    for (let i = n - 1; i >= 0; i--) {
+      ctx.lineTo(toX(i), toY(layer.bottom[i]));
+    }
+    ctx.closePath();
+    ctx.fillStyle = layer.color;
+    ctx.fill();
+  });
+
+  // Total rate line
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(totalRates[0]));
+  for (let i = 1; i < n; i++) ctx.lineTo(toX(i), toY(totalRates[i]));
+  ctx.strokeStyle = 'rgba(200,151,58,0.9)';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Tenor labels
+  ctx.fillStyle = 'rgba(11,28,46,0.4)';
+  ctx.font = `${8 * Math.min(W / 300, 1)}px "DM Mono", monospace`;
+  ctx.textAlign = 'center';
+  tenors.forEach((t, i) => {
+    if (i % 2 === 0 || i === n - 1) ctx.fillText(t, toX(i), H - 8);
+  });
+
+  // Y-axis label
+  ctx.fillStyle = 'rgba(11,28,46,0.35)';
+  ctx.font = '8px "DM Mono", monospace';
+  ctx.textAlign = 'right';
+  for (let j = 0; j <= 4; j++) {
+    const val = ((maxRate * (4 - j)) / 4 / 100).toFixed(1);
+    ctx.fillText(val + '%', pad.left - 4, pad.top + (j / 4) * chartH + 4);
+  }
+}
+
+// Init curve
+updateCurve();
+window.addEventListener('resize', updateCurve);
+
+// ——— TABS ———
+function switchTab(e, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+</script>
+</body>
+</html>
